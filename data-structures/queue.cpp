@@ -30,6 +30,18 @@ class Queue {
       length ++;
     }
 
+    void dequeue() {
+      if (isEmpty()) return;
+
+      front = front->next;
+
+      if (front == NULL) {
+        rear = NULL;
+      }
+
+      length --;
+    }
+
     void print() {
       ListNode *temp = front;
 
@@ -47,7 +59,9 @@ int main() {
   queue.enqueue(1);
   queue.enqueue(2);
   queue.enqueue(3);
-
+  queue.enqueue(4);
+  queue.dequeue();
+  
   queue.print();
 
   return 0;
