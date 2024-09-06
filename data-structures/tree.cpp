@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 
 class TreeNode {
   public:
@@ -33,11 +34,35 @@ class TreeBinary {
     preOrder(node->left);
     preOrder(node->right);
   }
+
+  void iterativePreOrder() {
+    if (root == NULL) return;
+
+    std::stack<TreeNode *> stack;
+    stack.push(root);
+
+    while(!stack.empty()) {
+      TreeNode *temp = stack.top();
+      stack.pop();
+
+      std::cout << temp->data << " -> ";
+
+      if (temp->right != NULL) {
+        stack.push(temp->right);
+      }
+
+      if (temp->left != NULL) {
+        stack.push(temp->left);
+      }
+    }
+  }
 };
 
 int main() {
   TreeBinary tree;
   tree.preOrder(tree.root);
-  
+  std::cout << std::endl;
+  tree.iterativePreOrder();
+
   return 0;
 }
