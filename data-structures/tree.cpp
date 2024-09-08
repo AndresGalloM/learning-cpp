@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stack>
+#include <queue>
 
 class TreeNode {
   public:
@@ -56,6 +57,27 @@ class TreeBinary {
       }
     }
   }
+
+  void levelOrder(TreeNode *node) {
+    if (node == NULL) return;
+
+    std::queue<TreeNode *> queue;
+    queue.push(node);
+
+    while(!queue.empty()) {
+      TreeNode *temp = queue.front();
+      queue.pop();
+      std::cout << temp->data << " -> ";
+    
+      if (temp->left != NULL) {
+        queue.push(temp->left);
+      }
+
+      if (temp->right != NULL) {
+        queue.push(temp->right);
+      }
+    }
+  }
 };
 
 int main() {
@@ -63,6 +85,8 @@ int main() {
   tree.preOrder(tree.root);
   std::cout << std::endl;
   tree.iterativePreOrder();
+  std::cout << std::endl;
+  tree.levelOrder(tree.root);
 
   return 0;
 }
