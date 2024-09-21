@@ -27,6 +27,18 @@ class BinarySearchTree {
 
       return node;
     }
+
+    TreeNode* search(TreeNode *node, int value) {
+      if (node == nullptr || value == node->data) {
+        return node;
+      }
+
+      if (value < node->data) {
+        return search(node->left, value);
+      } else {
+        return search(node->right, value);
+      }
+    }
 };
 
 int main() {
@@ -34,10 +46,12 @@ int main() {
   tree->root = tree->insert(tree->root, 5);
   tree->root = tree->insert(tree->root, 2);
   tree->root = tree->insert(tree->root, 7);
-  std::cout << tree->root->data << std::endl;
-  std::cout << tree->root->left->data << std::endl;
-  std::cout << tree->root->right->data << std::endl;
 
+  TreeNode *node = tree->search(tree->root, 15);
+  node == nullptr 
+    ? std::cout << "Null"
+    : std::cout << node->data;
   
+  std::cout << '\n';
   return 0;
 }
