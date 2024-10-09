@@ -16,10 +16,10 @@ class TreeBinary {
     TreeNode *root;
 
     TreeBinary() {
-      TreeNode *first = new TreeNode(1);
+      TreeNode *first = new TreeNode(6);
       TreeNode *second = new TreeNode(2);
-      TreeNode *third = new TreeNode(3);
-      TreeNode *fourth = new TreeNode(4);
+      TreeNode *third = new TreeNode(7);
+      TreeNode *fourth = new TreeNode(2);
 
       root = first;
 
@@ -78,10 +78,28 @@ class TreeBinary {
       }
     }
   }
+
+  bool isValid(TreeNode *node, int min, int max) {
+    if (node == nullptr) return true;
+
+    if (node->data <= min || node->data >= max) return false;
+
+    bool left = isValid(node->left, min, node->data);
+
+    if (left) {
+      return isValid(node->right, node->data, max);
+    }
+
+    return false;
+  }
 };
 
 int main() {
   TreeBinary tree;
+  bool valid = tree.isValid(tree.root, -2147483648, 2147483647);
+
+  std::cout << "Is valid: " << valid << std::endl;
+
   tree.preOrder(tree.root);
   std::cout << std::endl;
   tree.iterativePreOrder();
